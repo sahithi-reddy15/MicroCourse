@@ -85,7 +85,7 @@ const CourseDetail = () => {
             <div className="card p-8">
               {course.thumbnail && (
                 <img
-                  src={`http://localhost:5000/${course.thumbnail}`}
+                  src={`https://microcourse.onrender.com/${course.thumbnail}`}
                   alt={course.title}
                   className="w-full h-64 object-cover rounded-lg mb-6"
                 />

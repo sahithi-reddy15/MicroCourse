@@ -30,7 +30,7 @@ After deployment, update the frontend configuration:
    ```javascript
    const baseURL = process.env.NODE_ENV === 'production' 
      ? 'https://your-actual-vercel-url.vercel.app'  // Replace with your actual URL
-     : 'http://localhost:5000'
+     : 'https://microcourse.onrender.com'
    ```
 
 ### **3. Deploy to Vercel**

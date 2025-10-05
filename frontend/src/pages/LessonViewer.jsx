@@ -93,7 +93,7 @@ const LessonViewer = () => {
                     className="w-full h-full rounded-lg"
                     onTimeUpdate={(e) => setTimeSpent(e.target.currentTime)}
                   >
-                    <source src={`http://localhost:5000/${lesson.videoUrl}`} type="video/mp4" />
+                    <source src={`https://microcourse.onrender.com/${lesson.videoUrl}`} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 ) : (

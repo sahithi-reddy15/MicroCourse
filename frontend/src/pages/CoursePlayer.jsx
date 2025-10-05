@@ -209,7 +209,7 @@ const CoursePlayer = () => {
                       // Track video progress if needed
                     }}
                   >
-                    <source src={`http://localhost:5000/${currentLesson.videoUrl}`} type="video/mp4" />
+                    <source src={`https://microcourse.onrender.com/${currentLesson.videoUrl}`} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 ) : (

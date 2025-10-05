@@ -238,7 +238,7 @@ const EditCourse = () => {
                   ) : course.thumbnail ? (
                     <div>
                       <img
-                        src={`http://localhost:5000/${course.thumbnail}`}
+                        src={`https://microcourse.onrender.com/${course.thumbnail}`}
                         alt="Current thumbnail"
                         className="mx-auto h-32 w-32 object-cover rounded-lg"
                       />

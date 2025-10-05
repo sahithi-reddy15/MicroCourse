@@ -124,7 +124,7 @@ const Courses = () => {
               <div key={course._id} className="card overflow-hidden hover:shadow-lg transition-shadow">
                 {course.thumbnail && (
                   <img
-                    src={`http://localhost:5000/${course.thumbnail}`}
+                    src={`https://microcourse.onrender.com/${course.thumbnail}`}
                     alt={course.title}
                     className="w-full h-48 object-cover"
                   />

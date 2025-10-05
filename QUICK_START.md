@@ -17,7 +17,7 @@ npm run dev
 ```
 
 This will start:
-- **Backend API**: http://localhost:5000
+- **Backend API**: https://microcourse.onrender.com/
 - **Frontend App**: http://localhost:3000
 
 ### 3. Access the Application
