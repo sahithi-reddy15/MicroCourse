@@ -9,7 +9,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'https://micro-course-omega.vercel.app/', // replace with your Vercel frontend URL
+  origin: 'https://micro-course-omega.vercel.app', // replace with your Vercel frontend URL
   credentials: true
 }));
 app.use(express.json());
