@@ -36,7 +36,7 @@ const EditCourse = () => {
 
   const fetchCourseDetails = async () => {
     try {
-      const response = await axios.get(`/api/courses/${courseId}`)
+      const response = await axios.get(`/courses/${courseId}`)
       const courseData = response.data.course
       setCourse(courseData)
       setFormData({
@@ -81,7 +81,7 @@ const EditCourse = () => {
         formDataToSend.append('thumbnail', thumbnail)
       }
 
-      await axios.put(`/api/courses/${courseId}`, formDataToSend, {
+      await axios.put(`/courses/${courseId}`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

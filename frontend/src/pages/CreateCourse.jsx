@@ -57,7 +57,7 @@ const CreateCourse = () => {
         formDataToSend.append('thumbnail', thumbnail)
       }
 
-      const response = await axios.post('/api/courses', formDataToSend, {
+      const response = await axios.post('/courses', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

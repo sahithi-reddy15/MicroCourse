@@ -24,7 +24,7 @@ const Courses = () => {
       if (filters.difficulty) params.append('difficulty', filters.difficulty)
       if (filters.search) params.append('search', filters.search)
 
-      const response = await axios.get(`/api/courses?${params.toString()}`)
+      const response = await axios.get(`/courses?${params.toString()}`)
       setCourses(response.data.courses)
     } catch (error) {
       toast.error('Failed to fetch courses')

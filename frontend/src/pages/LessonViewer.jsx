@@ -20,7 +20,7 @@ const LessonViewer = () => {
 
   const fetchLessonDetails = async () => {
     try {
-      const response = await axios.get(`/api/lessons/${lessonId}`)
+      const response = await axios.get(`/lessons/${lessonId}`)
       setLesson(response.data.lesson)
       setCourse(response.data.lesson.course)
     } catch (error) {
@@ -38,7 +38,7 @@ const LessonViewer = () => {
     }
 
     try {
-      await axios.patch(`/api/progress/${lessonId}/complete`, {
+      await axios.patch(`/progress/${lessonId}/complete`, {
         timeSpent,
         lastPosition: 0
       })

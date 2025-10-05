@@ -24,7 +24,7 @@ const AddLesson = () => {
 
   const fetchCourseDetails = async () => {
     try {
-      const response = await axios.get(`/api/courses/${courseId}`)
+      const response = await axios.get(`/courses/${courseId}`)
       setCourse(response.data.course)
       setLessons(response.data.lessons)
       
@@ -67,7 +67,7 @@ const AddLesson = () => {
         formDataToSend.append('video', video)
       }
 
-      await axios.post('/api/lessons', formDataToSend, {
+      await axios.post('/lessons', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

@@ -17,7 +17,7 @@ const Progress = () => {
 
   const fetchProgress = async () => {
     try {
-      const response = await axios.get('/api/progress')
+      const response = await axios.get('/progress')
       setProgressData(response.data.progress)
     } catch (error) {
       toast.error('Failed to fetch progress data')
@@ -28,7 +28,7 @@ const Progress = () => {
 
   const fetchCertificates = async () => {
     try {
-      const response = await axios.get('/api/certificates')
+      const response = await axios.get('/certificates')
       const certMap = {}
       response.data.certificates.forEach(cert => {
         certMap[cert.course._id] = cert
@@ -41,7 +41,7 @@ const Progress = () => {
 
   const generateCertificate = async (courseId) => {
     try {
-      await axios.post(`/api/certificates/${courseId}`)
+      await axios.post(`/certificates/${courseId}`)
       toast.success('Certificate generated successfully!')
       fetchCertificates() // Refresh certificates
     } catch (error) {
@@ -52,7 +52,7 @@ const Progress = () => {
   const downloadCertificate = async (courseId) => {
     try {
       console.log('Attempting to download certificate for course:', courseId)
-      const response = await axios.get(`/api/certificates/${courseId}/download`, {
+      const response = await axios.get(`/certificates/${courseId}/download`, {
         responseType: 'blob'
       })
       

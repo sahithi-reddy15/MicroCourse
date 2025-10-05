@@ -16,7 +16,7 @@ const CourseLessons = () => {
 
   const fetchCourseDetails = async () => {
     try {
-      const response = await axios.get(`/api/courses/${courseId}`)
+      const response = await axios.get(`/courses/${courseId}`)
       setCourse(response.data.course)
       setLessons(response.data.lessons)
     } catch (error) {
@@ -33,7 +33,7 @@ const CourseLessons = () => {
     }
 
     try {
-      await axios.delete(`/api/lessons/${lessonId}`)
+      await axios.delete(`/lessons/${lessonId}`)
       toast.success('Lesson deleted successfully!')
       fetchCourseDetails()
     } catch (error) {
@@ -43,7 +43,7 @@ const CourseLessons = () => {
 
   const regenerateTranscript = async (lessonId) => {
     try {
-      await axios.post(`/api/lessons/${lessonId}/regenerate-transcript`)
+      await axios.post(`/lessons/${lessonId}/regenerate-transcript`)
       toast.success('Transcript regenerated successfully!')
       fetchCourseDetails()
     } catch (error) {
@@ -129,7 +129,7 @@ const CourseLessons = () => {
             
             {course.thumbnail && (
               <img
-                src={`http://localhost:5000/${course.thumbnail}`}
+                src={`/${course.thumbnail}`}
                 alt={course.title}
                 className="w-24 h-24 object-cover rounded-lg"
               />

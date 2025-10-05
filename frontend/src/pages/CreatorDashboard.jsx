@@ -13,7 +13,7 @@ const CreatorDashboard = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get('/api/courses')
+      const response = await axios.get('/courses')
       setCourses(response.data.courses)
     } catch (error) {
       toast.error('Failed to fetch courses')
@@ -24,7 +24,7 @@ const CreatorDashboard = () => {
 
   const submitForReview = async (courseId) => {
     try {
-      await axios.patch(`/api/courses/${courseId}/submit`)
+      await axios.patch(`/courses/${courseId}/submit`)
       toast.success('Course submitted for review!')
       fetchCourses()
     } catch (error) {
@@ -38,7 +38,7 @@ const CreatorDashboard = () => {
     }
 
     try {
-      await axios.delete(`/api/courses/${courseId}`)
+      await axios.delete(`/courses/${courseId}`)
       toast.success('Course deleted successfully!')
       fetchCourses()
     } catch (error) {

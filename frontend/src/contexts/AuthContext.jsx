@@ -1,98 +1,89 @@
-import { createContext, useContext, useState, useEffect } from 'react'
-import axios from '../config/axios'
+import { createContext, useContext, useState, useEffect } from 'react';
+import api from '../config/axios'; // use your Axios instance here
 
-const AuthContext = createContext()
+const AuthContext = createContext();
 
 export const useAuth = () => {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider')
+    throw new Error('useAuth must be used within an AuthProvider');
   }
-  return context
-}
+  return context;
+};
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  // Fetch user if token exists
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-      fetchUser()
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      fetchUser();
     } else {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [])
+  }, []);
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get('/api/auth/me')
-      setUser(response.data.user)
+      const response = await api.get('/auth/me'); // adjust backend route
+      setUser(response.data.user);
     } catch (error) {
-      localStorage.removeItem('token')
-      delete axios.defaults.headers.common['Authorization']
+      localStorage.removeItem('token');
+      delete api.defaults.headers.common['Authorization'];
+      setUser(null);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('/api/auth/login', { email, password })
-      const { token, user } = response.data
-      
-      localStorage.setItem('token', token)
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-      setUser(user)
-      
-      return { success: true }
+      const response = await api.post('/auth/login', { email, password });
+      const { token, user } = response.data;
+
+      localStorage.setItem('token', token);
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      setUser(user);
+
+      return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        message: error.response?.data?.message || 'Login failed' 
-      }
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Login failed',
+      };
     }
-  }
+  };
 
   const signup = async (name, email, password, role = 'learner') => {
     try {
-      const response = await axios.post('/api/auth/signup', { 
-        name, email, password, role 
-      })
-      const { token, user } = response.data
-      
-      localStorage.setItem('token', token)
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-      setUser(user)
-      
-      return { success: true }
+      const response = await api.post('/auth/signup', { name, email, password, role });
+      const { token, user } = response.data;
+
+      localStorage.setItem('token', token);
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      setUser(user);
+
+      return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        message: error.response?.data?.message || 'Signup failed' 
-      }
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Signup failed',
+      };
     }
-  }
+  };
 
   const logout = () => {
-    localStorage.removeItem('token')
-    delete axios.defaults.headers.common['Authorization']
-    setUser(null)
-  }
-
-  const value = {
-    user,
-    loading,
-    login,
-    signup,
-    logout,
-    fetchUser
-  }
+    localStorage.removeItem('token');
+    delete api.defaults.headers.common['Authorization'];
+    setUser(null);
+  };
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{ user, loading, login, signup, logout, fetchUser }}>
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};

@@ -36,7 +36,7 @@ const CoursePlayer = () => {
       }
       
       // Fetch course details
-      const courseResponse = await axios.get(`/api/courses/${courseId}`)
+      const courseResponse = await axios.get(`/courses/${courseId}`)
       setCourse(courseResponse.data.course)
       setLessons(courseResponse.data.lessons.sort((a, b) => a.orderIndex - b.orderIndex))
       
@@ -56,7 +56,7 @@ const CoursePlayer = () => {
       // Check enrollment status
       if (user) {
         try {
-          const enrollmentResponse = await axios.get(`/api/enroll/${courseId}/status`)
+          const enrollmentResponse = await axios.get(`/enroll/${courseId}/status`)
           setEnrollment(enrollmentResponse.data)
         } catch (error) {
           // User not enrolled, that's okay
@@ -88,7 +88,7 @@ const CoursePlayer = () => {
     }
 
     try {
-      const response = await axios.patch(`/api/progress/${lessonId}/complete`, {
+      const response = await axios.patch(`/progress/${lessonId}/complete`, {
         timeSpent: 0,
         lastPosition: 0
       })
@@ -115,7 +115,7 @@ const CoursePlayer = () => {
     }
 
     try {
-      await axios.post(`/api/enroll/${courseId}`)
+      await axios.post(`/enroll/${courseId}`)
       toast.success('Successfully enrolled in course!')
       fetchCourseData()
     } catch (error) {

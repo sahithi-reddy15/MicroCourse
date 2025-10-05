@@ -21,7 +21,7 @@ const CreatorApply = () => {
 
   const fetchApplicationStatus = async () => {
     try {
-      const response = await axios.get('/api/creator/status')
+      const response = await axios.get('/creator/status')
       setApplicationStatus(response.data)
     } catch (error) {
       console.error('Failed to fetch application status')
@@ -40,7 +40,7 @@ const CreatorApply = () => {
     setLoading(true)
 
     try {
-      await axios.post('/api/creator/apply', formData)
+      await axios.post('/creator/apply', formData)
       toast.success('Application submitted successfully!')
       fetchApplicationStatus()
     } catch (error) {
