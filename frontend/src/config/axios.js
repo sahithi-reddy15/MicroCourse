@@ -1,13 +1,14 @@
 import axios from 'axios';
 
-// ✅ Automatically pick correct backend URL for environment
+// Automatically pick correct backend URL for environment
 const baseURL = import.meta.env.MODE === 'production'
-  ? 'https://coursebackend-3.onrender.com' // Replace with your actual Render backend URL
-  : 'https://microcourse.onrender.com';
+  ? 'https://microcourse.onrender.com' // Render backend
+  : 'http://localhost:5000'; // Local dev backend
 
-// ✅ Apply to all Axios requests
-axios.defaults.baseURL = baseURL;
-axios.defaults.withCredentials = true; // allows cookies if needed (optional)
+// Create a configured Axios instance
+const instance = axios.create({
+  baseURL,
+  withCredentials: true, // needed if your backend uses cookies
+});
 
-// ✅ Export the configured Axios instance
-export default axios;
+export default instance;
